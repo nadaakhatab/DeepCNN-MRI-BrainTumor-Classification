@@ -12,7 +12,6 @@ import io
 import logging
 from pathlib import Path
 
-# ---------------- LOGGING ---------------- #
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -30,7 +29,6 @@ app.add_middleware(
 # Serve static files (your front.html)
 app.mount("/static", StaticFiles(directory="."), name="static")
 
-# ---------------- MODEL DEFINITION ---------------- #
 class DeepCNN(nn.Module):
     def __init__(self, num_classes=4):
         super().__init__()
@@ -56,7 +54,6 @@ class DeepCNN(nn.Module):
         return x
 
 
-# ---------------- LOAD MODEL & CLASSES ---------------- #
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 logger.info(f"Using device: {device}")
 
@@ -83,13 +80,11 @@ for model_file in ["model.pth", "best_model.pth"]:
 else:
     raise RuntimeError("Model file not found!")
 
-# ---------------- TRANSFORM ---------------- #
 transform = transforms.Compose([
     transforms.Resize((128, 128)),
     transforms.ToTensor(),
 ])
 
-# ---------------- PREDICT FUNCTION ---------------- #
 def predict_image(image_bytes: bytes):
     image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
     image = transform(image).unsqueeze(0).to(device)
@@ -106,7 +101,6 @@ def predict_image(image_bytes: bytes):
         "all_probabilities": {classes[i]: float(probs[i]) for i in range(len(classes))}
     }
 
-# ---------------- ROUTES ---------------- #
 @app.get("/", response_class=HTMLResponse)
 async def home():
     with open("front.html", "r", encoding="utf-8") as f:

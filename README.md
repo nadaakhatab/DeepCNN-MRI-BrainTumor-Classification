@@ -16,7 +16,7 @@ The project consists of two main parts:
 
 ---
 
-## ✨ Features
+## Features
 
 - **Custom CNN Architecture** built from scratch (No pre-trained models)
 - High accuracy: **~92%** on test set

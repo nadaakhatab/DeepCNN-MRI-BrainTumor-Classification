@@ -113,11 +113,3 @@ Brain_tumor/
 - **Classes**: 4 categories
 - **Total Images**: ~7000 MRI scans
 
-
----
-
-**Made with ❤️ using PyTorch & FastAPI**
-```
-
-run:
-uvicorn app:app --reload --port 8000

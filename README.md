@@ -97,7 +97,7 @@ Brain_tumor/
 ```
 
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Deep Learning**: PyTorch, torchvision
 - **Backend**: FastAPI
